@@ -49,9 +49,14 @@ resource "vsphere_virtual_machine" "vm" {
       "guestinfo.ves.clustername"                 = var.cluster_name,
       "guestinfo.ves.latitude"                    = var.sitelatitude,
       "guestinfo.ves.longitude"                   = var.sitelongitude,
-      "guestinfo.ves.token"                       = var.sitetoken
+      "guestinfo.ves.token"                       = volterra_token.token.id
     }
   }
+}
+
+resource "volterra_token" "token" {
+  name = format("%s-token", var.cluster_name)
+  namespace = "system"
 }
 
 module "site_wait_for_online" {
@@ -80,6 +85,15 @@ resource "volterra_site_state" "decommission_when_delete" {
   state      = "DECOMMISSIONING"
   wait_time  = 60
   retry      = 5
+  depends_on = [volterra_registration_approval.ce]
+}
+
+resource "volterra_modify_site" "site" {
+  name      = var.cluster_name
+  namespace = "system"
+  labels    = var.custom_labels
+  outside_vip = var.outside_vip
+  vip_vrrp_mode = var.outside_vip == "" ? "VIP_VRRP_DISABLE" : "VIP_VRRP_ENABLE"
   depends_on = [volterra_registration_approval.ce]
 }
 

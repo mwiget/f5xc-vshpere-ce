@@ -12,6 +12,10 @@ module "vsphere1" {
   vsphere_server        = var.vsphere_server
   vsphere_datacenter    = var.vsphere_datacenter
   vsphere_cluster       = var.vsphere_cluster
+  custom_labels         = {
+    "mylabel" = "yes"
+  }
+  outside_vip           = "192.168.41.60"
   nodes   = [
     { name = "master-0", host = "192.168.41.52", datastore = "datastore1", ipaddress = "192.168.41.61/24" },
     { name = "master-1", host = "192.168.41.52", datastore = "datastore1", ipaddress = "192.168.41.62/24" },
@@ -29,15 +33,9 @@ module "vsphere1" {
   memory                = 14336
   certifiedhardware     = "vmware-voltmesh"
   cluster_name          = format("%s-vsphere1", var.project_prefix)
-  sitetoken             = volterra_token.token.id
   sitelatitude          = "47"
   sitelongitude         = "8.5"
   ssh_public_key        = var.ssh_public_key
-}
-
-resource "volterra_token" "token" {
-  name = format("%s-token", var.project_prefix)
-  namespace = "system"
 }
 
 output "vsphere1" {

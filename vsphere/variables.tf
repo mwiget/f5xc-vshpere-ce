@@ -34,7 +34,14 @@ variable "f5xc_reg_url" {
 variable "certifiedhardware" {}
 variable "publicdefaultroute" {}
 variable "cluster_name" {}
-variable "sitetoken" {}
 variable "guest_type" {}
 variable "sitelatitude" {}
 variable "sitelongitude" {}
+variable "custom_labels" {
+  type  = map(string)
+  default = {}
+}
+variable "outside_vip" {
+  type = string
+  default = ""
+}
