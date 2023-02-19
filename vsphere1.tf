@@ -1,4 +1,4 @@
-module "vsphere2" {
+module "vsphere1" {
   source                = "./vsphere"
   f5xc_tenant           = var.f5xc_tenant
   f5xc_api_url          = var.f5xc_api_url
@@ -15,10 +15,11 @@ module "vsphere2" {
   custom_labels         = {
     "site-mesh" = var.project_prefix
   }
+#  outside_vip           = "192.168.40.110"
   nodes   = [
-    { name = "master-0", host = "192.168.40.100", datastore = "datastore3", ipaddress = "192.168.40.115/24" }
-    #  { name = "master-1", host = "192.168.40.100", datastore = "datastore3", ipaddress = "192.168.40.116/24" },
-    #  { name = "master-2", host = "192.168.40.100", datastore = "datastore3", ipaddress = "192.168.40.117/24" }
+    { name = "master-0", host = "192.168.40.100", datastore = "datastore2", ipaddress = "192.168.40.111/24" }
+#    { name = "master-1", host = "192.168.40.100", datastore = "datastore2", ipaddress = "192.168.40.112/24" },
+#    { name = "master-2", host = "192.168.40.100", datastore = "datastore2", ipaddress = "192.168.40.113/24" }
   ]
   outside_network       = "VM Network"
   dnsservers            = {
@@ -31,12 +32,12 @@ module "vsphere2" {
   cpus                  = 4
   memory                = 14336
   certifiedhardware     = "vmware-voltmesh"
-  cluster_name          = format("%s-vsphere2", var.project_prefix)
+  cluster_name          = format("%s-vsphere1", var.project_prefix)
   sitelatitude          = "47"
   sitelongitude         = "8.5"
   ssh_public_key        = var.ssh_public_key
 }
 
-output "vsphere2" {
-  value = module.vsphere2
+output "vsphere1" {
+  value = module.vsphere1
 }
