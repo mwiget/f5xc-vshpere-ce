@@ -89,12 +89,12 @@ resource "volterra_site_state" "decommission_when_delete" {
 }
 
 resource "volterra_modify_site" "site" {
-  name      = var.cluster_name
-  namespace = "system"
-  labels    = var.custom_labels
-  outside_vip = var.outside_vip
+  name          = var.cluster_name
+  namespace     = "system"
+  labels        = var.custom_labels
+  outside_vip   = var.outside_vip
   vip_vrrp_mode = var.outside_vip == "" ? "VIP_VRRP_DISABLE" : "VIP_VRRP_ENABLE"
-  depends_on = [volterra_registration_approval.ce]
+  depends_on    = [volterra_registration_approval.ce]
 }
 
 output "vm" {
