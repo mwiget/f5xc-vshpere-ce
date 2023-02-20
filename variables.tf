@@ -39,10 +39,6 @@ variable "f5xc_reg_url" {
   default = "ves.volterra.io"
 }
 
-variable "ssh_public_key" {
-  type = string
-}
-
 variable "vsphere_server" {
   type = string
   default = ""
@@ -65,4 +61,8 @@ variable "vsphere_cluster" {
 }
 variable "f5xc_ova_image" {
   type = string
+}
+variable "admin_password" {
+  type = string
+  default = ""
 }

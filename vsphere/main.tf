@@ -49,8 +49,19 @@ resource "vsphere_virtual_machine" "vm" {
       "guestinfo.ves.clustername"                 = var.cluster_name,
       "guestinfo.ves.latitude"                    = var.sitelatitude,
       "guestinfo.ves.longitude"                   = var.sitelongitude,
+      "guestinfo.ves.adminpassword"               = var.admin_password,
       "guestinfo.ves.token"                       = volterra_token.token.id
     }
+  }
+
+  lifecycle {
+    ignore_changes = [
+      annotation,
+      disk[0].io_share_count,
+      disk[1].io_share_count,
+      disk[2].io_share_count,
+      vapp[0].properties,
+    ]
   }
 }
 

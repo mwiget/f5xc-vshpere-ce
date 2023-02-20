@@ -3,7 +3,6 @@ variable "f5xc_api_url" {}
 variable "f5xc_api_ca_cert" {}
 variable "f5xc_namespace" {}
 variable "f5xc_api_token" {}
-variable "ssh_public_key" {}
 
 variable "vsphere_server" {}
 variable "vsphere_user" {}
@@ -44,4 +43,9 @@ variable "custom_labels" {
 variable "outside_vip" {
   type = string
   default = ""
+}
+variable "admin_password" {
+  type = string
+  default = ""
+  description = "admin shell password, needs at least one uppercase letter"
 }

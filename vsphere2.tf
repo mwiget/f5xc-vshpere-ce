@@ -12,6 +12,7 @@ module "vsphere2" {
   vsphere_server        = var.vsphere_server
   vsphere_datacenter    = var.vsphere_datacenter
   vsphere_cluster       = var.vsphere_cluster
+  admin_password        = var.admin_password
   custom_labels         = {
     "site-mesh" = var.project_prefix
   }
@@ -34,7 +35,6 @@ module "vsphere2" {
   cluster_name          = format("%s-vsphere2", var.project_prefix)
   sitelatitude          = "47"
   sitelongitude         = "8.5"
-  ssh_public_key        = var.ssh_public_key
 }
 
 output "vsphere2" {
