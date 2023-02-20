@@ -99,8 +99,5 @@ resource "volterra_modify_site" "site" {
 }
 
 output "vm" {
-  value = vsphere_virtual_machine.vm[*]
-}
-output "network" {
-  value = data.vsphere_network.outside
+  value = vsphere_virtual_machine.vm
 }
