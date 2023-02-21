@@ -24,7 +24,8 @@ data "vsphere_network" "outside" {
   datacenter_id = data.vsphere_datacenter.dc.id
 }
 
-#data "vsphere_network" "inside" {
-#  name          = var.inside_network
-#  datacenter_id = data.vsphere_datacenter.dc.id
-#}
+data "vsphere_network" "inside" {
+  name          = var.inside_network == "" ? var.outside_network : var.inside_network
+  datacenter_id = data.vsphere_datacenter.dc.id
+}
+

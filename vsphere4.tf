@@ -1,4 +1,4 @@
-module "vsphere3" {
+module "vsphere4" {
   source                = "./vsphere"
   f5xc_tenant           = var.f5xc_tenant
   f5xc_api_url          = var.f5xc_api_url
@@ -16,13 +16,13 @@ module "vsphere3" {
   custom_labels         = {
     "site-mesh" = var.project_prefix
   }
-  #  outside_vip           = "192.168.40.120"
   nodes   = [
-    { name = "master-0", host = "192.168.40.100", datastore = "datastore3", ipaddress = "192.168.40.121/24" }
-    #   { name = "master-1", host = "192.168.40.100", datastore = "datastore3", ipaddress = "192.168.40.122/24" },
-    #   { name = "master-2", host = "192.168.40.100", datastore = "datastore3", ipaddress = "192.168.40.123/24" }
+    { name = "master-0", host = "192.168.40.100", datastore = "datastore3", ipaddress = "192.168.40.125/24" }
+#    { name = "master-1", host = "192.168.40.100", datastore = "datastore3", ipaddress = "192.168.40.122/24" },
+#    { name = "master-2", host = "192.168.40.100", datastore = "datastore3", ipaddress = "192.168.40.123/24" }
   ]
   outside_network       = "VM Network"
+  inside_network        = "openwrt_inside"
   dnsservers            = {
     primary = "8.8.8.8"
     secondary = "4.4.4.4"
@@ -32,12 +32,12 @@ module "vsphere3" {
   guest_type            = "other3xLinux64Guest"
   cpus                  = 4
   memory                = 14336
-  certifiedhardware     = "vmware-voltmesh"
-  cluster_name          = format("%s-vsphere3", var.project_prefix)
+  certifiedhardware     = "vmware-regular-nic-voltmesh"
+  cluster_name          = format("%s-vsphere4", var.project_prefix)
   sitelatitude          = "47"
   sitelongitude         = "8.5"
 }
 
-output "vsphere3" {
-  value = module.vsphere3
+output "vsphere4" {
+  value = module.vsphere4
 }

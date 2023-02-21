@@ -20,6 +20,10 @@ variable "nodes" {
 }
 
 variable "outside_network" {}
+variable "inside_network" {
+  type = string
+  default = ""
+}
 variable "publicdefaultgateway" {}
 variable "dnsservers" {}
 variable "cpus" {}

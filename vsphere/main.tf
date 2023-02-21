@@ -14,6 +14,13 @@ resource "vsphere_virtual_machine" "vm" {
     network_id   = data.vsphere_network.outside.id
     adapter_type = "vmxnet3"
   }
+  dynamic "network_interface" {
+    for_each = var.inside_network == "" ? [] : [0]
+    content {
+      network_id   = data.vsphere_network.inside.id
+      adapter_type = "vmxnet3"
+    }
+  }
 
   disk {
     label            = "disk0"
@@ -28,8 +35,11 @@ resource "vsphere_virtual_machine" "vm" {
 
     disk_provisioning = "thick"
 
-    ovf_network_map = {
+    ovf_network_map = var.inside_network == "" ? { 
+      "OUTSIDE" = data.vsphere_network.outside.id 
+    } : {
       "OUTSIDE" = data.vsphere_network.outside.id
+      "REGULAR" = data.vsphere_network.inside.id
     }
   }
 
