@@ -16,10 +16,11 @@ module "vsphere2" {
   custom_labels         = {
     "site-mesh" = var.project_prefix
   }
+  outside_vip           = "192.168.40.114"
   nodes   = [
-    { name = "master-0", host = "192.168.40.100", datastore = "datastore3", ipaddress = "192.168.40.115/24" }
-    #  { name = "master-1", host = "192.168.40.100", datastore = "datastore3", ipaddress = "192.168.40.116/24" },
-    #  { name = "master-2", host = "192.168.40.100", datastore = "datastore3", ipaddress = "192.168.40.117/24" }
+    { name = "master-0", host = "192.168.40.100", datastore = "datastore3", ipaddress = "192.168.40.115/24" },
+    { name = "master-1", host = "192.168.40.100", datastore = "datastore3", ipaddress = "192.168.40.116/24" },
+    { name = "master-2", host = "192.168.40.100", datastore = "datastore3", ipaddress = "192.168.40.117/24" }
   ]
   outside_network       = "VM Network"
   dnsservers            = {
