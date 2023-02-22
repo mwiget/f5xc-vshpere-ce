@@ -14,7 +14,8 @@ module "vsphere4" {
   vsphere_cluster       = var.vsphere_cluster
   admin_password        = var.admin_password
   custom_labels         = {
-    "site-mesh" = var.project_prefix
+    "site-mesh"     = var.project_prefix
+    "ves.io/fleet"  = format("%s-vsphere4", var.project_prefix)
   }
   nodes   = [
     { name = "master-0", host = "192.168.40.100", datastore = "datastore3", ipaddress = "192.168.40.125/24" }
