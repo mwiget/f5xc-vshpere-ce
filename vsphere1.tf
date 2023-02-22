@@ -1,5 +1,5 @@
 module "vsphere1" {
-  source                = "./vsphere"
+  source                = "./modules/f5xc/ce/vsphere"
   f5xc_tenant           = var.f5xc_tenant
   f5xc_api_url          = var.f5xc_api_url
   f5xc_namespace        = var.f5xc_namespace
@@ -16,7 +16,7 @@ module "vsphere1" {
   custom_labels         = {
     "site-mesh" = var.project_prefix
   }
-  outside_vip           = "192.168.40.110"
+  #  outside_vip           = "192.168.40.110"
   nodes   = [
     { name = "master-0", host = "192.168.40.100", datastore = "datastore2", ipaddress = "192.168.40.111/24" },
     { name = "master-1", host = "192.168.40.100", datastore = "datastore2", ipaddress = "192.168.40.112/24" },
